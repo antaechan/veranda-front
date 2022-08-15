@@ -13,13 +13,6 @@
 }
 
 .LeftBar {
-  border-right: 2px solid black;
-
-  display: flex;
-  align-items: center;
-
-  padding-left: 20px;
-
   width: 70%;
 }
 
@@ -27,5 +20,33 @@
   display: flex;
   align-items: center;
 
+  border-left: 2px solid black;
   padding-left: 220px;
+}
+
+.unFoldedLeftBar {
+  width: calc(100%-20px);
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: left;
+  padding: 8px 20px;
+
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+
+  position: relative;
+  z-index: 1;
+
+  background-color: rgb(255, 252, 246);
+}
+
+.foldedLeftBar {
+  padding-left: 20px;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
 }

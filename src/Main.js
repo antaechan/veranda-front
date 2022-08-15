@@ -1,14 +1,33 @@
-import "./Main.css";
 import Title from "./main/Title";
 import MenuBar from "./main/MenuBar";
-import Content from "./main/Content";
+import Root from "./main/pages/Root";
+import Zines from "./main/pages/Zines";
+import Videos from "./main/pages/Videos";
+import Clubhouse from "./main/pages/Clubhouse";
+import Community from "./main/pages/Community";
+import About from "./main/pages/About";
+import Values from "./main/pages/Values";
+import Contact from "./main/pages/Contact";
+
+import { Routes, Route } from "react-router-dom";
+
+import "./Main.css";
 
 function Main() {
   return (
     <div className="Main">
       <Title />
       <MenuBar />
-      <Content />
+      <Routes>
+        <Route path="/" element={<Root />} />
+        <Route path="/zine" element={<Zines />} />
+        <Route path="/videos" element={<Videos />} />
+        <Route path="/clubhouse" element={<Clubhouse />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/values" element={<Values />} />
+        <Route path="/contact" element={<Contact />} />
+      </Routes>
     </div>
   );
 }
