@@ -1,3 +1,9 @@
 .Title {
   height: 15%;
+
+  text-align: right;
+}
+
+.vLogo {
+  height: 100%;
 }
