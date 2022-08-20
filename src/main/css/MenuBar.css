@@ -12,19 +12,9 @@
   font-size: 30px;
 }
 
-.LeftBar {
-  width: 70%;
-}
-
-.RightBar {
-  display: flex;
-  align-items: center;
-
-  padding-left: 220px;
-}
-
 .unFoldedLeftBar {
-  width: calc(100%-20px);
+  width: 70%;
+  height: fit-content;
 
   display: flex;
   flex-direction: column;
@@ -42,12 +32,60 @@
 }
 
 .foldedLeftBar {
-  padding-left: 20px;
+  width: 70%;
 
-  height: 100%;
+  padding: 0px 20px;
 
   display: flex;
   align-items: center;
 
   border-right: 2px solid black;
+}
+
+.unFoldedRightBar {
+  width: 30%;
+
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: right;
+  padding: 8px 30px;
+  padding-bottom: 20px;
+
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+
+  position: relative;
+  z-index: 1;
+
+  background-color: rgb(255, 252, 246);
+}
+
+.foldedRightBar {
+  width: 30%;
+  justify-content: right;
+
+  padding: 0px 30px;
+
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  font-style: normal;
+}
+
+.searchLine {
+  width: 90%;
+  background-color: rgb(255, 252, 246);
+  border: none;
+  outline: none;
+
+  border-bottom: 2px solid black;
+
+  font-size: 25px;
+  font-family: "Times New Roman", Times, serif;
 }
