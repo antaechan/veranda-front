@@ -12,6 +12,7 @@ import Contact from "./main/pages/Contact";
 import { Routes, Route } from "react-router-dom";
 
 import "./Main.css";
+import "antd/dist/antd.min.css";
 
 function Main() {
   return (
