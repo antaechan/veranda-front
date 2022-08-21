@@ -12,6 +12,10 @@ function LeftBar() {
     return state.menuBar.isRightBarClicked;
   });
 
+  const currCategory = useSelector((state) => {
+    return state.menuBar.category;
+  });
+
   const workWhenLeftBarClicked = (e) => {
     dispatch(menuBarSlice.actions.setCategory(e));
     dispatch(menuBarSlice.actions.setRightBarClicked(false));
@@ -22,7 +26,12 @@ function LeftBar() {
       <div
         className="unFoldedLeftBar"
         onClick={() => setLeftBarClicked(false)}
-        style={{ borderRight: isRightBarClicked ? "none" : "2px solid black" }}
+        style={{
+          borderRight:
+            isRightBarClicked && currCategory === "Zine"
+              ? "none"
+              : "2px solid black",
+        }}
       >
         <div>Index</div>
         <br />
@@ -91,7 +100,12 @@ function LeftBar() {
       <div
         className="foldedLeftBar"
         onClick={() => setLeftBarClicked(true)}
-        style={{ borderRight: isRightBarClicked ? "none" : "2px solid black" }}
+        style={{
+          borderRight:
+            isRightBarClicked && currCategory === "Zine"
+              ? "none"
+              : "2px solid black",
+        }}
       >
         Index
       </div>
