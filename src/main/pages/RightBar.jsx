@@ -19,19 +19,18 @@ function RightBar(props) {
 
   if (isRightBarClicked && currCategory === "Zine") {
     return (
-      <div
-        className="unFoldedRightBar"
-        onClick={() => workWhenRightBarClicked(false)}
-      >
-        <div>Zine</div>
-        <br />
-        <div onClick={(e) => {}}>Fashion</div>
-        <div onClick={(e) => {}}>Food</div>
-        <div onClick={(e) => {}}>Music</div>
-        <div onClick={(e) => {}}>Lifestyle</div>
-        <br />
-        <div onClick={(e) => {}}>Exclusives</div>
-        <br />
+      <div className="unFoldedRightBar">
+        <div onClick={() => workWhenRightBarClicked(false)}>
+          <div>Zine</div>
+          <br />
+          <div onClick={(e) => {}}>Fashion</div>
+          <div onClick={(e) => {}}>Food</div>
+          <div onClick={(e) => {}}>Music</div>
+          <div onClick={(e) => {}}>Lifestyle</div>
+          <br />
+          <div onClick={(e) => {}}>Exclusives</div>
+          <br />
+        </div>
         <div className="search">
           <input type="text" className="searchLine" />
           🔍
