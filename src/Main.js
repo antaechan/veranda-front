@@ -2,6 +2,8 @@ import Title from "./main/Title";
 import MenuBar from "./main/MenuBar";
 import Root from "./main/pages/Root";
 import Zines from "./main/pages/Zines";
+import Zine from "./main/pages/Zine";
+import EditZine from "./main/pages/EditZine";
 import Videos from "./main/pages/Videos";
 import Clubhouse from "./main/pages/Clubhouse";
 import Community from "./main/pages/Community";
@@ -12,6 +14,7 @@ import Contact from "./main/pages/Contact";
 import { Routes, Route } from "react-router-dom";
 
 import "./Main.css";
+import "antd/dist/antd.min.css";
 
 function Main() {
   return (
@@ -21,6 +24,8 @@ function Main() {
       <Routes>
         <Route path="/" element={<Root />} />
         <Route path="/zine" element={<Zines />} />
+        <Route path="/edit" element={<EditZine />} />
+        <Route path="/zine/:id" element={<Zine />} />
         <Route path="/videos" element={<Videos />} />
         <Route path="/clubhouse" element={<Clubhouse />} />
         <Route path="/community" element={<Community />} />
