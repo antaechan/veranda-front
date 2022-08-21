@@ -1,6 +1,6 @@
 import { Card } from "antd";
 import React from "react";
-import StyledLink from "../StyledLink";
+import StyledLink from "./StyledLink";
 
 const { Meta } = Card;
 
