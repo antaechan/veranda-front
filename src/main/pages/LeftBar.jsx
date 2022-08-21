@@ -1,28 +1,26 @@
 import React, { useState } from "react";
 import StyledLink from "./../StyledLink";
 import { useDispatch } from "react-redux";
-import categorySlice from "../../slices/categorySlice";
+import menuBarSlice from "../../slices/menuBarSlice";
 
 function LeftBar() {
   const [leftBarClicked, setLeftBarClicked] = useState(false);
   const dispatch = useDispatch();
 
-  const setRightBarCategory = (e) => {
-    dispatch(categorySlice.actions.setCategory(e));
+  const workWhenLeftBarClicked = (e) => {
+    dispatch(menuBarSlice.actions.setCategory(e));
+    dispatch(menuBarSlice.actions.setRightBarClicked(false));
   };
 
   if (leftBarClicked) {
     return (
-      <div
-        className="unFoldedLeftBar"
-        onClick={() => setLeftBarClicked(!leftBarClicked)}
-      >
+      <div className="unFoldedLeftBar" onClick={() => setLeftBarClicked(false)}>
         <div>Index</div>
         <br />
         <StyledLink
           to="zine"
           onClick={(e) => {
-            setRightBarCategory("Zine");
+            workWhenLeftBarClicked("Zine");
           }}
         >
           Zine
@@ -30,7 +28,7 @@ function LeftBar() {
         <StyledLink
           to="videos"
           onClick={(e) => {
-            setRightBarCategory("Videos");
+            workWhenLeftBarClicked("Videos");
           }}
         >
           Videos
@@ -39,7 +37,7 @@ function LeftBar() {
         <StyledLink
           to="clubhouse"
           onClick={(e) => {
-            setRightBarCategory("Clubhouse");
+            workWhenLeftBarClicked("Clubhouse");
           }}
         >
           Clubhouse
@@ -47,7 +45,7 @@ function LeftBar() {
         <StyledLink
           to="community"
           onClick={(e) => {
-            setRightBarCategory("Community");
+            workWhenLeftBarClicked("Community");
           }}
         >
           Community
@@ -56,7 +54,7 @@ function LeftBar() {
         <StyledLink
           to="about"
           onClick={(e) => {
-            setRightBarCategory("About");
+            workWhenLeftBarClicked("About");
           }}
         >
           About
@@ -64,7 +62,7 @@ function LeftBar() {
         <StyledLink
           to="values"
           onClick={(e) => {
-            setRightBarCategory("Values");
+            workWhenLeftBarClicked("Values");
           }}
         >
           Our Values
@@ -72,7 +70,7 @@ function LeftBar() {
         <StyledLink
           to="Contact"
           onClick={(e) => {
-            setRightBarCategory("Contact");
+            workWhenLeftBarClicked("Contact");
           }}
         >
           Contact
@@ -81,10 +79,7 @@ function LeftBar() {
     );
   } else {
     return (
-      <div
-        className="foldedLeftBar"
-        onClick={() => setLeftBarClicked(!leftBarClicked)}
-      >
+      <div className="foldedLeftBar" onClick={() => setLeftBarClicked(true)}>
         Index
       </div>
     );

@@ -1,18 +1,27 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import menuBarSlice from "../../slices/menuBarSlice";
 
 function RightBar(props) {
-  const [rightBarClicked, setRightBarClicked] = useState(false);
-
-  const currCategory = useSelector((state) => {
-    return state.category.category;
+  const isRightBarClicked = useSelector((state) => {
+    return state.menuBar.isRightBarClicked;
   });
 
-  if (rightBarClicked && currCategory === "Zine") {
+  const currCategory = useSelector((state) => {
+    return state.menuBar.category;
+  });
+
+  const dispatch = useDispatch();
+
+  function workWhenRightBarClicked(bool) {
+    dispatch(menuBarSlice.actions.setRightBarClicked(bool));
+  }
+
+  if (isRightBarClicked && currCategory === "Zine") {
     return (
       <div
         className="unFoldedRightBar"
-        onClick={() => setRightBarClicked(false)}
+        onClick={() => workWhenRightBarClicked(false)}
       >
         <div>Zine</div>
         <br />
@@ -31,7 +40,10 @@ function RightBar(props) {
     );
   } else {
     return (
-      <div className="foldedRightBar" onClick={() => setRightBarClicked(true)}>
+      <div
+        className="foldedRightBar"
+        onClick={() => workWhenRightBarClicked(true)}
+      >
         {currCategory}
       </div>
     );
