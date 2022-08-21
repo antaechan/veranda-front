@@ -23,10 +23,18 @@ function RightBar(props) {
         <div onClick={() => workWhenRightBarClicked(false)}>
           <div>Zine</div>
           <br />
-          <div onClick={(e) => {}}>Fashion</div>
-          <div onClick={(e) => {}}>Food</div>
-          <div onClick={(e) => {}}>Music</div>
-          <div onClick={(e) => {}}>Lifestyle</div>
+          <div className="category" onClick={(e) => {}}>
+            Fashion
+          </div>
+          <div className="category" onClick={(e) => {}}>
+            Food
+          </div>
+          <div className="category" onClick={(e) => {}}>
+            Music
+          </div>
+          <div className="category" onClick={(e) => {}}>
+            Lifestyle
+          </div>
           <br />
           <div onClick={(e) => {}}>Exclusives</div>
           <br />
