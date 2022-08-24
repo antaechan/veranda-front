@@ -1,0 +1,41 @@
+.zineContent {
+  padding: 10px;
+}
+
+.pageNavigator {
+  background-color: red;
+  display: flex;
+
+  justify-content: center;
+
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.previousButton {
+  padding-right: 5px;
+}
+
+.nextButton {
+  padding-left: 5px;
+}
+
+.pageNumberButton {
+  padding: 0px 5px;
+  font-weight: bold;
+
+  color: black;
+}
+
+.postButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 10%;
+  height: 40px;
+
+  margin: 10px 0px;
+
+  font-size: 30px;
+}
