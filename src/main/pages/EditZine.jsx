@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Editor from "../components/write/Editor";
 import WriteActionButtons from "../components/write/WriteActionButtons";
+import EditorContainer from "../containers/write/EditorContainer";
 
 class EditZine extends Component {
   editor = null;
@@ -9,7 +9,7 @@ class EditZine extends Component {
     return (
       <>
         <WriteActionButtons />
-        <Editor />
+        <EditorContainer />
       </>
     );
   }

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import Button from "antd/lib/button";
 
 const WriteActionButtonsBlock = styled.div`
   display: flex;
@@ -12,11 +11,46 @@ const WriteActionButtonsBlock = styled.div`
   }
   justify-content: end;
 `;
+
+const StyledButton = styled.button`
+  padding: 0.3rem 1rem;
+  /* font-family: "Times New Roman", serif; */
+  font-size: 1rem;
+  /* font-weight: bold; */
+  text-align: center;
+  text-decoration: none;
+
+  display: inline-block;
+
+  border: 1.5px solid ${(props) => props.borderColor};
+  border-radius: 3px;
+
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.backgroundColor};
+  &:hover {
+    /* color: ${(props) => props.backgroundColor};
+    background-color: ${(props) => props.color}; */
+    cursor: pointer;
+  }
+`;
+
 const WriteActionButtons = () => {
   return (
     <WriteActionButtonsBlock>
-      <Button type="primary">포스트 등록</Button>
-      <Button>취소</Button>
+      <StyledButton
+        color={"white"}
+        backgroundColor={"black"}
+        borderColor={"black"}
+      >
+        출간하기
+      </StyledButton>
+      <StyledButton
+        color={"#353535"}
+        backgroundColor={"white"}
+        borderColor={"LightGrey"}
+      >
+        나가기
+      </StyledButton>
     </WriteActionButtonsBlock>
   );
 };
