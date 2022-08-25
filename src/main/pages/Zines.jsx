@@ -1,15 +1,14 @@
-import { Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import PhotoCard from "../components/PhotoCard";
+import zinesSlice from "../../slices/zinesSlice";
+import ZinesAtPageNumber from "../components/zines/ZinesAtPageNumber";
+import Footer from "./../components/zines/Footer";
+import ZineContainer from "../components/ZineContainer";
+
 import axios from "axios";
-import StyledLink from "./../components/StyledLink";
+
+import { useDispatch } from "react-redux";
 
 import "./css/Zines.css";
-
-const ZineContainer = styled.div`
-  box-sizing: border-box;
-`;
 
 const sampleZine = {
   title: "Spongebob",
@@ -20,8 +19,6 @@ const sampleZine = {
 const Zines = () => {
   const [zines, setZines] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
-  const zinesInPage = 12;
 
   useEffect(() => {
     // const fetchZines = async () => {
@@ -53,24 +50,39 @@ const Zines = () => {
       sampleZine,
       sampleZine,
       sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
+      sampleZine,
     ]);
   }, []);
 
-  function range(start, end) {
-    let array = [];
-    for (let i = start; i <= end; ++i) {
-      array.push(i);
-    }
-    return array;
-  }
-
-  const pageEnd = Math.ceil(zines.length / zinesInPage);
-  const pageList = range(1, pageEnd);
-
-  const zinesAtPage = zines.slice(
-    zinesInPage * (pageNumber - 1),
-    zinesInPage * pageNumber
-  );
+  const dispatch = useDispatch();
+  dispatch(zinesSlice.actions.setZines(zines));
 
   if (loading) {
     return <ZineContainer>로딩 중...</ZineContainer>;
@@ -80,49 +92,10 @@ const Zines = () => {
     return null;
   }
 
-  const PageNavigator = () => {
-    // const prevPageNumber =
-    //   pageNumber === 1 ? pageNumber : setPageNumber(pageNumber - 1);
-    // const nextPageNumber =
-    //   pageNumber === pageEnd ? pageNumber : setPageNumber(pageNumber + 1);
-    var prevURL = `/zine/${pageNumber}`;
-    var nextURL = `/zine/${pageNumber}`;
-
-    return (
-      <div className="pageNavigator" onClick={() => {}}>
-        <StyledLink to={String(pageNumber)} className="previousButton">
-          Previous
-        </StyledLink>
-        {pageList.map((pageNumber) => {
-          const pageURL = `/zine/${pageNumber}`;
-          return (
-            <StyledLink to={pageURL} className="pageNumberButton">
-              {pageNumber}
-            </StyledLink>
-          );
-        })}
-        <StyledLink to={String(pageNumber)} className="nextButton">
-          Next
-        </StyledLink>
-      </div>
-    );
-  };
-
   return (
     <div className="zineContent">
-      <ZineContainer>
-        <Row gutter={[16, 16]}>
-          {zinesAtPage.map((zine) => (
-            <Col xs={12} sm={12} md={8} lg={6} xl={6}>
-              <PhotoCard zine={zine} />
-            </Col>
-          ))}
-        </Row>
-      </ZineContainer>
-      <PageNavigator />
-      <StyledLink to="/edit" className="postButton" onClick={() => {}}>
-        ✍
-      </StyledLink>
+      <ZinesAtPageNumber />
+      <Footer />
     </div>
   );
 };
