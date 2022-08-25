@@ -61,23 +61,6 @@ const Zines = () => {
       sampleZine,
       sampleZine,
       sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
-      sampleZine,
     ]);
   }, []);
 

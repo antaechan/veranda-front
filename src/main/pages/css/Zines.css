@@ -3,7 +3,6 @@
 }
 
 .pageNavigator {
-  background-color: red;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,6 +11,8 @@
 
   font-size: 20px;
   font-family: "Times New Roman", Times, serif;
+
+  background-color: red;
 }
 
 .previousButton {
@@ -25,8 +26,6 @@
 .pageNumberButton {
   padding: 0px 5px;
   font-weight: bold;
-
-  color: black;
 }
 
 .postButton {
