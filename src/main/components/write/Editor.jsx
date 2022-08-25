@@ -25,14 +25,14 @@ const QuillWrapper = styled.div`
     padding: 1rem;
     height: 500px;
     font-size: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.5;
     max-height: 500px;
     overflow: auto;
   }
   .ql-editor.ql-blanck::before {
     left: 0px;
   }
-  padding-bottom: 3rem;
+  padding-bottom: 2rem;
 `;
 
 const ThumbnailInput = styled.input`
@@ -61,13 +61,15 @@ const StyledButton = styled.button`
 `;
 
 const ThumbnailBox = styled.img`
-  margin: 2rem auto;
-  width: 50%;
+  border: 1px solid darkgrey;
+  margin-bottom: 2rem;
+  width: 70%;
 `;
 
 const ThumbnailContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 const Editor = ({ title, body, onChangeField }) => {
   const [thumbnail, setThumbnail] = useState(null);
@@ -141,8 +143,8 @@ const Editor = ({ title, body, onChangeField }) => {
         <ThumbnailBox src={thumbnail} />
         <StyledButton
           color={"white"}
-          backgroundColor={"DimGrey"}
-          borderColor={"DimGrey"}
+          backgroundColor={"black"}
+          borderColor={"black"}
           onClick={onThumbnailInputBtnClick}
         >
           썸네일 이미지 등록
