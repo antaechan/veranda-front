@@ -27,8 +27,17 @@ const PageNavigator = () => {
   const nextPageNumber = pageNumber === pageEnd ? pageNumber : pageNumber + 1;
   const prevURL = `/zine/${prevPageNumber}`;
   const nextURL = `/zine/${nextPageNumber}`;
+  let seriesOfPage = [];
 
-  const seriesOfPage = returnSeriesOfNumber(1, pageEnd);
+  if (pageEnd <= 10) {
+    seriesOfPage = returnSeriesOfNumber(1, pageEnd);
+  } else {
+    seriesOfPage = returnSeriesOfNumber(
+      10 * parseInt((pageNumber - 1) / 10) + 1,
+      Math.min(10 * parseInt((pageNumber - 1) / 10) + 10, pageEnd)
+    );
+  }
+
   function returnSeriesOfNumber(start, end) {
     let array = [];
     for (let i = start; i <= end; ++i) {
