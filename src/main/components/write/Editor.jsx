@@ -1,6 +1,5 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import Quill from "quill";
-import "quill/dist/quill.snow.css";
 import styled from "styled-components";
 import client from "../../../lib/api/client";
 
@@ -95,6 +94,8 @@ const Editor = ({ title, body, onChangeField }) => {
           ],
         },
       });
+      const toolbar = quillInstance.current.getModule("toolbar");
+      toolbar.addHandler("image", imageHandler);
     }
     const quill = quillInstance.current;
     quill.on("text-change", (delta, oldDleta, source) => {
@@ -108,6 +109,28 @@ const Editor = ({ title, body, onChangeField }) => {
     onChangeField({ key: "title", value: e.target.value });
   };
 
+  const imageHandler = () => {
+    console.log("이미지 업로드 시도");
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.addEventListener("change", async () => {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append("img", file);
+      try {
+        const result = await client.post("/img", formData);
+        console.log("이미지 업로드 성공, url:", result.data.url);
+        const IMG_URL = result.data.url;
+        const range = quillInstance.current.getSelection();
+        quillInstance.current.insertEmbed(range.index, "image", IMG_URL);
+      } catch (error) {
+        console.log("이미지 업로드 실패");
+      }
+    });
+  };
   const onThumbnailInputBtnClick = (e) => {
     e.preventDefault();
     thumbnailInputElement.current.click();

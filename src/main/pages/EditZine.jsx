@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import WriteActionButtons from "../components/write/WriteActionButtons";
 import EditorContainer from "../containers/write/EditorContainer";
+import WriteActionButtonsContainer from "../containers/write/WriteActionButtonsContainer";
 
 class EditZine extends Component {
   editor = null;
@@ -8,7 +8,7 @@ class EditZine extends Component {
   render() {
     return (
       <>
-        <WriteActionButtons />
+        <WriteActionButtonsContainer />
         <EditorContainer />
       </>
     );

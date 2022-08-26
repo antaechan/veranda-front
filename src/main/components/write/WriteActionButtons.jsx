@@ -34,13 +34,14 @@ const StyledButton = styled.button`
   }
 `;
 
-const WriteActionButtons = () => {
+const WriteActionButtons = ({ onPublish, onCancel }) => {
   return (
     <WriteActionButtonsBlock>
       <StyledButton
         color={"white"}
         backgroundColor={"black"}
         borderColor={"black"}
+        onClick={onPublish}
       >
         출간하기
       </StyledButton>
@@ -48,6 +49,7 @@ const WriteActionButtons = () => {
         color={"#353535"}
         backgroundColor={"white"}
         borderColor={"LightGrey"}
+        onClick={onCancel}
       >
         나가기
       </StyledButton>
