@@ -2,6 +2,7 @@ import { useRef, useEffect, useState, useMemo } from "react";
 import Quill from "quill";
 import styled from "styled-components";
 import client from "../../../lib/api/client";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const TitleInput = styled.input`
   /* :placeholder-shown {
@@ -62,7 +63,17 @@ const StyledButton = styled.button`
 const ThumbnailBox = styled.img`
   border: 1px solid darkgrey;
   margin-bottom: 2rem;
-  width: 70%;
+  width: 50%;
+`;
+const ThumbnailEmptyBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid darkgrey;
+  margin-bottom: 2rem;
+  background-color: white;
+  min-width: 50%;
+  aspect-ratio: 1/1;
 `;
 
 const ThumbnailContainer = styled.div`
@@ -139,11 +150,16 @@ const Editor = ({ title, body, onChangeField }) => {
   const onThumbnailChange = async (e) => {
     setThumbnailLoading(true);
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
-    setThumbnail(URL.createObjectURL(e.target.files[0]));
-    console.log(URL.createObjectURL(e.target.files[0]));
-    // const response = await client.post("/url", formData);
-    // response.data.location이 업로드한 파일의 url
+    const file = e.target.files[0];
+    formData.append("img", file);
+    try {
+      const result = await client.post("/img", formData);
+      console.log("이미지 업로드 성공, url: ", result.data.url);
+      const IMG_URL = result.data.url;
+      setThumbnail(IMG_URL);
+    } catch (error) {
+      console.log("이미지 업로드 실패");
+    }
     setThumbnailLoading(false);
   };
   return (
@@ -163,7 +179,14 @@ const Editor = ({ title, body, onChangeField }) => {
           accept="image/*"
           onChange={onThumbnailChange}
         />
-        <ThumbnailBox src={thumbnail} />
+        {thumbnail ? (
+          <ThumbnailBox src={thumbnail} />
+        ) : (
+          <ThumbnailEmptyBox>
+            <ClipLoader color={"black"} loading={thumbnailLoading} size={100} />
+          </ThumbnailEmptyBox>
+        )}
+
         <StyledButton
           color={"white"}
           backgroundColor={"black"}
