@@ -3,7 +3,6 @@ import MenuBar from "./main/MenuBar";
 import Root from "./main/pages/Root";
 import Zines from "./main/pages/Zines";
 import Zine from "./main/pages/Zine";
-import EditZine from "./main/pages/EditZine";
 import Videos from "./main/pages/Videos";
 import Clubhouse from "./main/pages/Clubhouse";
 import Community from "./main/pages/Community";
@@ -15,6 +14,8 @@ import { Routes, Route } from "react-router-dom";
 
 import "./Main.css";
 import "antd/dist/antd.min.css";
+import Editor from "./main/components/write/Editor";
+import EditZine from "./main/pages/EditZine";
 
 function Main() {
   return (
