@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState, useMemo } from "react";
 import Quill from "quill";
 import styled from "styled-components";
-import client from "../../../lib/api/client";
+import imgClient from "../../../lib/api/imgClient";
 import ClipLoader from "react-spinners/ClipLoader";
 
 const TitleInput = styled.input`
@@ -132,7 +132,7 @@ const Editor = ({ title, body, onChangeField }) => {
       const formData = new FormData();
       formData.append("img", file);
       try {
-        const result = await client.post("/img", formData);
+        const result = await imgClient.post("/img", formData);
         console.log("이미지 업로드 성공, url:", result.data.url);
         const IMG_URL = result.data.url;
         const range = quillInstance.current.getSelection();
@@ -153,7 +153,7 @@ const Editor = ({ title, body, onChangeField }) => {
     const file = e.target.files[0];
     formData.append("img", file);
     try {
-      const result = await client.post("/img", formData);
+      const result = await imgClient.post("/img", formData);
       console.log("이미지 업로드 성공, url: ", result.data.url);
       const IMG_URL = result.data.url;
       setThumbnail(IMG_URL);
