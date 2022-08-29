@@ -14,7 +14,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./Main.css";
 import "antd/dist/antd.min.css";
-import Editor from "./main/components/write/Editor";
+import "quill/dist/quill.snow.css";
 import EditZine from "./main/pages/EditZine";
 
 function Main() {
