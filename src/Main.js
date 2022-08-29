@@ -25,8 +25,8 @@ function Main() {
       <Routes>
         <Route path="/" element={<Root />} />
         <Route path="/zine" element={<Zines />} />
+        <Route path="/zine/:pageNumber" element={<Zines />} />
         <Route path="/edit" element={<EditZine />} />
-        <Route path="/zine/:id" element={<Zine />} />
         <Route path="/videos" element={<Videos />} />
         <Route path="/clubhouse" element={<Clubhouse />} />
         <Route path="/community" element={<Community />} />

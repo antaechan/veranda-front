@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import StyledLink from "./../StyledLink";
+import StyledLink from "../components/StyledLink";
 import { useSelector, useDispatch } from "react-redux";
 import menuBarSlice from "../../slices/menuBarSlice";
-import { notInitialized } from "react-redux/es/utils/useSyncExternalStore";
 
 function LeftBar() {
   const [leftBarClicked, setLeftBarClicked] = useState(false);

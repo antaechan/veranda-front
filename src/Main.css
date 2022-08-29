@@ -1,6 +1,8 @@
 .Main {
   text-align: center;
-  height: 100vh;
+  height: auto;
+  min-height: 100vh;
+  max-height: 155vh;
   margin: 0px 15%;
 
   border-left: 2px solid black;

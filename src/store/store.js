@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import menuBarSlice from "../slices/menuBarSlice";
+import zinesSlice from "../slices/zinesSlice";
 import editorSlice from "../slices/editorSlice";
 import viewerSlice from "../slices/viewerSlice";
 
@@ -13,6 +14,7 @@ import readSaga from "../sagas/readSaga";
 
 export const rootReducer = combineReducers({
   menuBar: menuBarSlice.reducer,
+  zines: zinesSlice.reducer,
   editor: editorSlice.reducer,
   viewer: viewerSlice.reducer,
 });
