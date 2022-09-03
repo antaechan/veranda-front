@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState } from "react";
 import Quill from "quill";
-import "quill/dist/quill.snow.css";
 import styled from "styled-components";
-import client from "../../../lib/api/client";
+import imgClient from "../../../lib/api/imgClient";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const TitleInput = styled.input`
   /* :placeholder-shown {
@@ -63,7 +63,17 @@ const StyledButton = styled.button`
 const ThumbnailBox = styled.img`
   border: 1px solid darkgrey;
   margin-bottom: 2rem;
-  width: 70%;
+  width: 50%;
+`;
+const ThumbnailEmptyBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid darkgrey;
+  margin-bottom: 2rem;
+  background-color: white;
+  min-width: 50%;
+  aspect-ratio: 1/1;
 `;
 
 const ThumbnailContainer = styled.div`
@@ -71,8 +81,7 @@ const ThumbnailContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const Editor = ({ title, body, onChangeField }) => {
-  const [thumbnail, setThumbnail] = useState(null);
+const Editor = ({ title, body, thumbnail, onChangeField }) => {
   const [thumbnailLoading, setThumbnailLoading] = useState(false);
   const quillElement = useRef(null);
   const quillInstance = useRef(null);
@@ -95,6 +104,8 @@ const Editor = ({ title, body, onChangeField }) => {
           ],
         },
       });
+      const toolbar = quillInstance.current.getModule("toolbar");
+      toolbar.addHandler("image", imageHandler);
     }
     const quill = quillInstance.current;
     quill.on("text-change", (delta, oldDleta, source) => {
@@ -108,6 +119,33 @@ const Editor = ({ title, body, onChangeField }) => {
     onChangeField({ key: "title", value: e.target.value });
   };
 
+  const imageHandler = () => {
+    console.log("이미지 업로드 시도");
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+
+    input.addEventListener("change", async () => {
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append("image", file);
+      try {
+        const result = await imgClient.post("/articles/upload", formData);
+        console.log("이미지 업로드 성공, result:", result);
+        const filename = result.data;
+        const IMG_URL = `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/images/${filename}`;
+        const range = quillInstance.current.getSelection();
+        quillInstance.current.insertEmbed(range.index, "image", IMG_URL);
+        onChangeField({
+          key: "body",
+          value: quillInstance.current.root.innerHTML,
+        });
+      } catch (error) {
+        console.log("이미지 업로드 실패");
+      }
+    });
+  };
   const onThumbnailInputBtnClick = (e) => {
     e.preventDefault();
     thumbnailInputElement.current.click();
@@ -116,11 +154,18 @@ const Editor = ({ title, body, onChangeField }) => {
   const onThumbnailChange = async (e) => {
     setThumbnailLoading(true);
     const formData = new FormData();
-    formData.append("file", e.target.files[0]);
-    setThumbnail(URL.createObjectURL(e.target.files[0]));
-    console.log(URL.createObjectURL(e.target.files[0]));
-    // const response = await client.post("/url", formData);
-    // response.data.location이 업로드한 파일의 url
+    const file = e.target.files[0];
+    formData.append("image", file);
+    try {
+      const result = await imgClient.post("/articles/upload", formData);
+      console.log("이미지 업로드 성공, result: ", result);
+      const filename = result.data;
+      const IMG_URL = `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/images/${filename}`;
+      onChangeField({ key: "thumbnail", value: IMG_URL });
+    } catch (error) {
+      console.log("이미지 업로드 실패");
+      console.log(error);
+    }
     setThumbnailLoading(false);
   };
   return (
@@ -140,7 +185,14 @@ const Editor = ({ title, body, onChangeField }) => {
           accept="image/*"
           onChange={onThumbnailChange}
         />
-        <ThumbnailBox src={thumbnail} />
+        {thumbnail ? (
+          <ThumbnailBox src={thumbnail} />
+        ) : (
+          <ThumbnailEmptyBox>
+            <ClipLoader color={"black"} loading={thumbnailLoading} size={100} />
+          </ThumbnailEmptyBox>
+        )}
+
         <StyledButton
           color={"white"}
           backgroundColor={"black"}

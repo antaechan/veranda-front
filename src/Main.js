@@ -14,7 +14,7 @@ import { Routes, Route } from "react-router-dom";
 
 import "./Main.css";
 import "antd/dist/antd.min.css";
-import Editor from "./main/components/write/Editor";
+import "quill/dist/quill.snow.css";
 import EditZine from "./main/pages/EditZine";
 
 function Main() {
@@ -26,6 +26,7 @@ function Main() {
         <Route path="/" element={<Root />} />
         <Route path="/zine" element={<Zines />} />
         <Route path="/zine/:pageNumber" element={<Zines />} />
+        <Route path="/viewer/:articleId" element={<Zine />} />
         <Route path="/edit" element={<EditZine />} />
         <Route path="/videos" element={<Videos />} />
         <Route path="/clubhouse" element={<Clubhouse />} />

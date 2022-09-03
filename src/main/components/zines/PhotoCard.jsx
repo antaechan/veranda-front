@@ -1,18 +1,19 @@
 import { Card } from "antd";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
 const PhotoCard = ({ zine }) => {
-  const { title, src, alt, url } = zine;
+  const { title, path, alt, id } = zine;
   return (
-    <div to={url}>
+    <Link to={`/viewer/${id}`}>
       <Card
         hoverable
         cover={
           <img
             alt={alt}
-            src={src}
+            src={path}
             style={{
               height: "100%",
               width: "100%",
@@ -30,7 +31,7 @@ const PhotoCard = ({ zine }) => {
           style={{ fontFamily: "Times New Roman", fontWeight: "bold" }}
         />
       </Card>
-    </div>
+    </Link>
   );
 };
 

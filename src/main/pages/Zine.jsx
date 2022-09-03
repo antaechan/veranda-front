@@ -1,9 +1,7 @@
-import { useParams } from "react-router-dom";
 import React from "react";
-
+import PostViewerContainer from "../containers/post/PostViewerContainer";
 const Zine = () => {
-  const { id } = useParams();
-  return <div></div>;
+  return <PostViewerContainer />;
 };
 
 export default Zine;
