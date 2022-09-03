@@ -7,6 +7,7 @@ const PostViewerBlock = styled.div`
 `;
 
 const PostHead = styled.div`
+  text-align: center;
   padding-bottom: 3rem;
   margin-bottom: 3rem;
   h1 {
@@ -66,16 +67,15 @@ const PostViewer = ({ post, error, loading }) => {
     return null;
   }
 
-  const { title, body, user, publishedDate } = post;
+  const { title, body } = { title: post.title, body: post.article };
+  // const { title, body, user, publishedDate } = post;
   return (
     <PostViewerBlock>
       <PostHead>
         <h1>{title}</h1>
         <SubInfo>
-          <span>
-            <b>{user.username}</b>
-          </span>
-          <span>{new Date(publishedDate).toLocaleDateString()}</span>
+          <span>{/* <b>{user.username}</b> */}</span>
+          {/* <span>{new Date(publishedDate).toLocaleDateString()}</span> */}
         </SubInfo>
       </PostHead>
       <PostContent dangerouslySetInnerHTML={{ __html: body }} />

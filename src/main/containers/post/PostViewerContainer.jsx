@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 const PostViewerContainer = () => {
   const params = useParams();
-  const { id } = params;
+  const { articleId } = params;
   const dispatch = useDispatch();
   const { post, error } = useSelector(({ viewer }) => ({
     post: viewer.post,
@@ -15,11 +15,11 @@ const PostViewerContainer = () => {
   }));
 
   useEffect(() => {
-    dispatch(read_post(id));
+    dispatch(read_post(articleId));
     return () => {
       dispatch(unload_post());
     };
-  }, [dispatch, id]);
+  }, [dispatch, articleId]);
   return <PostViewer post={post} error={error} />;
 };
 

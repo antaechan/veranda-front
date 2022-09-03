@@ -28,9 +28,10 @@ const Zines = () => {
 
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/articles`
+          `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/articles`
         );
-        setZines(response.data.zines);
+        console.log(response);
+        setZines(response.data);
       } catch (error) {
         console.log("Error:", error);
       }

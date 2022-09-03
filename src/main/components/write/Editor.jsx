@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState } from "react";
 import Quill from "quill";
 import styled from "styled-components";
 import imgClient from "../../../lib/api/imgClient";
@@ -81,8 +81,7 @@ const ThumbnailContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-const Editor = ({ title, body, onChangeField }) => {
-  const [thumbnail, setThumbnail] = useState(null);
+const Editor = ({ title, body, thumbnail, onChangeField }) => {
   const [thumbnailLoading, setThumbnailLoading] = useState(false);
   const quillElement = useRef(null);
   const quillInstance = useRef(null);
@@ -130,13 +129,18 @@ const Editor = ({ title, body, onChangeField }) => {
     input.addEventListener("change", async () => {
       const file = input.files[0];
       const formData = new FormData();
-      formData.append("img", file);
+      formData.append("image", file);
       try {
-        const result = await imgClient.post("/img", formData);
-        console.log("이미지 업로드 성공, url:", result.data.url);
-        const IMG_URL = result.data.url;
+        const result = await imgClient.post("/articles/upload", formData);
+        console.log("이미지 업로드 성공, result:", result);
+        const filename = result.data;
+        const IMG_URL = `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/images/${filename}`;
         const range = quillInstance.current.getSelection();
         quillInstance.current.insertEmbed(range.index, "image", IMG_URL);
+        onChangeField({
+          key: "body",
+          value: quillInstance.current.root.innerHTML,
+        });
       } catch (error) {
         console.log("이미지 업로드 실패");
       }
@@ -151,14 +155,16 @@ const Editor = ({ title, body, onChangeField }) => {
     setThumbnailLoading(true);
     const formData = new FormData();
     const file = e.target.files[0];
-    formData.append("img", file);
+    formData.append("image", file);
     try {
-      const result = await imgClient.post("/img", formData);
-      console.log("이미지 업로드 성공, url: ", result.data.url);
-      const IMG_URL = result.data.url;
-      setThumbnail(IMG_URL);
+      const result = await imgClient.post("/articles/upload", formData);
+      console.log("이미지 업로드 성공, result: ", result);
+      const filename = result.data;
+      const IMG_URL = `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/images/${filename}`;
+      onChangeField({ key: "thumbnail", value: IMG_URL });
     } catch (error) {
       console.log("이미지 업로드 실패");
+      console.log(error);
     }
     setThumbnailLoading(false);
   };
