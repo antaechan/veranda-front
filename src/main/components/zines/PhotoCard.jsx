@@ -1,6 +1,7 @@
 import { Card } from "antd";
 import React from "react";
 import { Link } from "react-router-dom";
+import imgPlaceholder from "../../../asset/imgs/imgPlaceholder.png";
 
 const { Meta } = Card;
 
@@ -13,7 +14,7 @@ const PhotoCard = ({ zine }) => {
         cover={
           <img
             alt={alt}
-            src={path}
+            src={path || imgPlaceholder}
             style={{
               // width: "100%",
               aspectRatio: "1/1",
