@@ -11,6 +11,10 @@
   font-weight: bold;
   font-style: italic;
   font-size: 30px;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+  user-select:none
 }
 
 .unFoldedLeftBar {
