@@ -61,6 +61,7 @@ const PageNavigator = () => {
         const pageURL = `/zine/${pageNumber}`;
         return (
           <StyledLink
+            key={pageNumber}
             to={pageURL}
             className="pageNumberButton"
             onClick={() => {

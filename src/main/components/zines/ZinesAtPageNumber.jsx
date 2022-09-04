@@ -26,7 +26,7 @@ const ZinesAtPageNumber = () => {
     <ZineContainer>
       <Row gutter={[16, 16]}>
         {zinesAtPageNumber.map((zine) => (
-          <Col xs={12} sm={12} md={8} lg={6} xl={6}>
+          <Col xs={12} sm={12} md={8} lg={6} xl={6} key={zine.id}>
             <PhotoCard zine={zine} />
           </Col>
         ))}
