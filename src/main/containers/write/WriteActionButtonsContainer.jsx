@@ -26,8 +26,8 @@ const WriteActionButtonsContainer = () => {
 
   useEffect(() => {
     if (post) {
-      const { _id } = post;
-      navigate(`/viewer/${_id}`);
+      const { id } = post;
+      navigate(`/viewer/${id}`);
     }
     if (postError) {
       alert(postError.message);
