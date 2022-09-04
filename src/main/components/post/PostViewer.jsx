@@ -27,12 +27,15 @@ const SubInfo = styled.div`
     content: "\\B7";
   }
 `;
-const PostContent = styled.div`
-  font-size: 1.3rem;
-  color: black;
-  text-align: left;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+const PostContent = styled.div.attrs((props) => ({
+  className: props.className,
+}))`
+  font-size: 1.2rem;
+  padding: 0 15%;
+  img {
+    margin: 1rem 0;
+    width: 100%;
+  }
 `;
 
 const ErrorContent = styled.div`
@@ -78,7 +81,10 @@ const PostViewer = ({ post, error, loading }) => {
           {/* <span>{new Date(publishedDate).toLocaleDateString()}</span> */}
         </SubInfo>
       </PostHead>
-      <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+      <PostContent
+        className={"ql-editor"}
+        dangerouslySetInnerHTML={{ __html: body }}
+      />
     </PostViewerBlock>
   );
 };

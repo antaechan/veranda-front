@@ -9,6 +9,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 
 import "./css/Zines.css";
+import { ClipLoader } from "react-spinners";
 
 axios.defaults.withCredentials = true;
 
@@ -304,7 +305,21 @@ const Zines = () => {
   dispatch(zinesSlice.actions.setZines(zines));
 
   if (loading) {
-    return <ZineContainer>로딩 중...</ZineContainer>;
+    return (
+      <div
+        style={{
+          padding: "10px",
+          minHeight: "66vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        <div style={{ alignSelf: "center" }}>
+          <ClipLoader color={"black"} size={100} />
+        </div>
+      </div>
+    );
   }
 
   if (!zines) {
