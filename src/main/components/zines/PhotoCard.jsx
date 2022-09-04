@@ -15,9 +15,9 @@ const PhotoCard = ({ zine }) => {
             alt={alt}
             src={path}
             style={{
-              height: "100%",
-              width: "100%",
-              objectFit: "contain",
+              // width: "100%",
+              aspectRatio: "1/1",
+              objectFit: "cover",
             }}
           />
         }
@@ -27,8 +27,16 @@ const PhotoCard = ({ zine }) => {
         }}
       >
         <Meta
-          title={title}
-          style={{ fontFamily: "Times New Roman", fontWeight: "bold" }}
+          title={
+            <span
+              style={{
+                fontFamily: "Times New Roman",
+                fontWeight: "bold",
+              }}
+            >
+              {title}
+            </span>
+          }
         />
       </Card>
     </Link>
