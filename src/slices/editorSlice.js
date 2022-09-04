@@ -11,7 +11,7 @@ const initialState = {
 };
 
 const reducers = {
-  initialize: (state, action) => editorSlice.initialState,
+  initialize: (state, action) => initialState,
   changeField: (state, action) => {
     const { key, value } = action.payload;
     return {
