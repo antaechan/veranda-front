@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import zinesSlice from "../../slices/zinesSlice";
+import menuBarSlice from "./../../slices/menuBarSlice";
 import ZinesAtPageNumber from "../components/zines/ZinesAtPageNumber";
 import Footer from "./../components/zines/Footer";
-import ZineContainer from "../components/ZineContainer";
-
-import axios from "axios";
-
-import { useDispatch } from "react-redux";
-
-import "./css/Zines.css";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import { ClipLoader } from "react-spinners";
-
-axios.defaults.withCredentials = true;
+import axios from "axios";
+import "./css/Zines.css";
 
 const Zines = () => {
-  const [zines, setZines] = useState([]);
   const [loading, setLoading] = useState(false);
   const fetchZines = async () => {
     setLoading(true);
@@ -23,20 +18,28 @@ const Zines = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/articles`
       );
-      console.log(response);
-      setZines(response.data);
+      dispatch(zinesSlice.actions.setZines(response.data));
     } catch (error) {
       console.log("Error:", error);
     }
     setLoading(false);
   };
 
-  useEffect(() => {
-    fetchZines();
-  }, []);
+  const zines = useSelector((state) => {
+    return state.zines.zines;
+  });
 
   const dispatch = useDispatch();
-  dispatch(zinesSlice.actions.setZines(zines));
+  let { pageNumber } = useParams();
+  if (pageNumber === undefined) {
+    pageNumber = 1;
+  }
+
+  useEffect(() => {
+    fetchZines();
+    dispatch(menuBarSlice.actions.setCategory("Zine"));
+    dispatch(zinesSlice.actions.setPageNumber(pageNumber));
+  }, []);
 
   if (loading) {
     return (
