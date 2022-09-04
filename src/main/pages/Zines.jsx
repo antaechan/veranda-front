@@ -16,22 +16,22 @@ axios.defaults.withCredentials = true;
 const Zines = () => {
   const [zines, setZines] = useState([]);
   const [loading, setLoading] = useState(false);
+  const fetchZines = async () => {
+    setLoading(true);
+
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/articles`
+      );
+      console.log(response);
+      setZines(response.data);
+    } catch (error) {
+      console.log("Error:", error);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    const fetchZines = async () => {
-      setLoading(true);
-
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}:${process.env.REACT_APP_SERVER_PORT}/articles`
-        );
-        console.log(response);
-        setZines(response.data);
-      } catch (error) {
-        console.log("Error:", error);
-      }
-      setLoading(false);
-    };
     fetchZines();
   }, []);
 
